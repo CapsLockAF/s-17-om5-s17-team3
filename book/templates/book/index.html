@@ -1,0 +1,40 @@
+{% extends 'book/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<table class="table">
+     <thead class="thead-dark">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Author</th>
+          <th scope="col">
+              Count
+          </th>
+        </tr>
+    </thead>
+      <tbody>
+            {% for book in books %}
+            <tr>
+                <td scope="row">
+                    <a title="view book {{ book.name }}"
+                       type="button"
+                       class="btn btn-warning btn-sm"
+                       href="/book/{{ book.id }}">
+                        {{ book.id }}
+                    </a>
+                </td>
+                <td>{{ book.name }}</td>
+                <td>{% for book_author in book.authors.all %}
+                           {{ book_author.name }} {{ book_author.surname }}<br>
+                    {% endfor %}
+                </td>
+                <td>{{ book.count }}</td>
+            </tr>
+            {% endfor %}
+      </tbody>
+</table>
+{% endblock %}
