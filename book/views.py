@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import *
 from order.models import Order
+from .create_bd import set_bd
 
 
 def show_all_books(request):
@@ -76,12 +77,8 @@ def show_ordered_books(request):
                   })
 
 
-
-
 def start(request):
-    books_list = []
-    for i in range(1, 100):
-        book1 = Book.create(f'Book-{i}', f'Description{i}', i*2, [f'Author{i}', f'Author{i*10}'],)
-        books_list.append(book1)
-    return render(request, 'book/start.html')
+    # for i in range(40, 1000, 10):
+    set_bd(60)
+    return render(request, 'book/index.html')
 
