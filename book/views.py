@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from order.models import Order
 from .create_bd import set_bd
+from book.forms import BookForm
 
 
 def show_all_books(request):
@@ -81,4 +82,28 @@ def start(request):
     # for i in range(40, 1000, 10):
     set_bd(60)
     return render(request, 'book/index.html')
+
+
+def book_form(request, id=0):
+    if request.method == "GET":
+        if id == 0:
+            form = BookForm()
+        else:
+            books = Book.objects.get(pk=id)
+            form = BookForm(instance=books)
+        return render(request, "book/book_form.html", {"form":form})
+    else:
+        if id == 0:
+            form = BookForm(request.POST)
+        else:
+            books = Book.objects.get(pk=id)
+            form = BookForm(request.POST, instance=books)
+        if form.is_valid():
+            form.save()
+        return redirect("/book")
+
+
+def deleted_form(request, id):
+    Book.delete_by_id(id)
+    return redirect("/book")
 
