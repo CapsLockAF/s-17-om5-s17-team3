@@ -8,12 +8,12 @@
 <table class="table">
      <thead class="thead-dark">
         <tr>
-          <th scope="col">ID</th>
           <th scope="col">Name</th>
           <th scope="col">Author</th>
           <th scope="col">
               Count
           </th>
+          <th scope="col">Edit</th>
         </tr>
     </thead>
       <tbody>
@@ -24,17 +24,21 @@
                        type="button"
                        class="btn btn-warning btn-sm"
                        href="/book/{{ book.id }}">
-                        {{ book.id }}
+                        {{ book.name }}
                     </a>
                 </td>
-                <td>{{ book.name }}</td>
                 <td>{% for book_author in book.authors.all %}
                            {{ book_author.name }} {{ book_author.surname }}<br>
                     {% endfor %}
                 </td>
                 <td>{{ book.count }}</td>
+                <td>
+                    <a href="{% url "updated_form" book.id %}">Update</a>
+                    <a href="{% url "deleted_form" book.id %}">Delete</a>
+                </td>
             </tr>
             {% endfor %}
       </tbody>
 </table>
+    <button type="button" class="btn btn-outline-primary"><a href="form/">Add book</a></button>
 {% endblock %}
