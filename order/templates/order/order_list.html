@@ -1,0 +1,49 @@
+{% extends 'order/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block heading %}
+{{ heading }}
+{% endblock %}
+
+{% block content %}
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">User</th>
+      <th scope="col">Book</th>
+      <th scope="col">created at</th>
+      <th scope="col">end at</th>
+      <th scope="col">plated at</th>
+        <th> <a type="button" class="btn btn-success btn-sm" href="/order/0">+ Add Order </a> </th>
+    </tr>
+  </thead>
+  <tbody>
+      {% if orders %}
+        {% for order in orders %}
+                  <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ order.user.first_name }}</td>
+                    <td>{{ order.book.name }}</td>
+                    <td>{{ order.created_at }}</td>
+                    <td>{{ order.end_at }}</td>
+                    <td>{{ order.plated_end_at }}</td>
+                    <td><a type="button" class="btn btn-info btn-sm" href="/order/{{ order.id }}/view">View</a>
+                    <a type="button" class="btn btn-warning btn-sm" href="/order/{{ order.id }}">Update</a>
+                    <a type="button" class="btn btn-danger btn-sm" href="/order/{{ order.id }}/delete">Delete</a></td>
+                  </tr>
+             {% endfor %}
+    {% else %}
+        <p>Sorry, there is no any order in our list...</p>
+    {% endif %}
+
+
+  </tbody>
+</table>
+
+
+{% endblock %}
