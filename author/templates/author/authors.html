@@ -23,7 +23,7 @@
                 <td>{{ author.surname }}</td>
                 <td>{{ author.patronymic }}</td>
                 <td><a href="{% url "update_form" author.id %}">Update</a>
-                    <a href="{% url "delete_form" author.id %}">Delete</a>
+                    <a href="{% url "delete_author" author.id %}">Delete</a>
                 </td>
             </tr>
             {% endfor %}
