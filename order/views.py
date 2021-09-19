@@ -1,15 +1,23 @@
 from django.shortcuts import render, redirect
 from .models import Order
 from .forms import OrderForm
+from django.core.paginator import Paginator
+
+num_items = 5
 
 
 def all_orders(request):
     orders = Order.get_all()
+    paginator = Paginator(orders, num_items)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    page_nums = range(page_obj.paginator.num_pages)
     return render(request, 'order/order_list.html',
                   {
                       'title': "Orders",
                       'heading': "All Orders",
-                      "orders": orders
+                      'page_obj': page_obj,
+                      'page_nums': page_nums,
                   })
 
 

@@ -17,7 +17,7 @@
         </tr>
     </thead>
       <tbody>
-            {% for book in books %}
+            {% for book in page_obj %}
             <tr>
                 <td scope="row">
                     <a title="view book {{ book.name }}"
@@ -33,12 +33,13 @@
                 </td>
                 <td>{{ book.count }}</td>
                 <td>
-                    <a href="{% url "updated_form" book.id %}">Update</a>
-                    <a href="{% url "deleted_form" book.id %}">Delete</a>
+                    <a href="{% url 'updated_form' book.id %}">Update</a>
+                    <a href="{% url 'deleted_form' book.id %}">Delete</a>
                 </td>
             </tr>
             {% endfor %}
       </tbody>
 </table>
-    <button type="button" class="btn btn-outline-primary"><a href="form/">Add book</a></button>
+    <button type="button" class="btn btn-outline-primary mb-5"><a href="form/">Add book</a></button>
+{% include 'authentication/pagination_snippet.html' %}
 {% endblock %}

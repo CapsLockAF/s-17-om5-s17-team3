@@ -17,17 +17,18 @@
         </tr>
     </thead>
       <tbody>
-            {% for author in authors %}
+            {% for author in page_obj %}
             <tr>
                 <td>{{ author.name }}</td>
                 <td>{{ author.surname }}</td>
                 <td>{{ author.patronymic }}</td>
-                <td><a href="{% url "update_form" author.id %}">Update</a>
-                    <a href="{% url "delete_form" author.id %}">Delete</a>
+                <td><a href="{% url 'update_form' author.id %}">Update</a>
+                    <a href="{% url 'delete_form' author.id %}">Delete</a>
                 </td>
             </tr>
             {% endfor %}
       </tbody>
 </table>
-<button type="button" class="btn btn-outline-primary"><a href="form">Add author</a></button>
+<button type="button" class="btn btn-outline-primary mb-5"><a href="form">Add author</a></button>
+{% include 'authentication/pagination_snippet.html' %}
 {% endblock %}

@@ -3,15 +3,23 @@ from .models import *
 from order.models import Order
 from .create_bd import set_bd
 from book.forms import BookForm
+from django.core.paginator import Paginator
+
+num_items = 5
 
 
 def show_all_books(request):
     all_books = Book.get_all()
+    paginator = Paginator(all_books, num_items)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    page_nums = range(page_obj.paginator.num_pages)
     return render(request, 'book/index.html',
                   {
                       'title': 'Books Information',
                       "heading": "All Books",
-                      'books': all_books,
+                      'page_obj': page_obj,
+                      'page_nums': page_nums,
                       'state_sort': 'asc'
                   })
 
@@ -39,11 +47,16 @@ def show_book_by_field(request, field_prop="id", field_value=""):
             return []
 
     all_books = option(field_prop)
+    paginator = Paginator(all_books, num_items)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    page_nums = range(page_obj.paginator.num_pages)
     return render(request, 'book/index.html',
                   {
                       'title': f"Books by {field_prop}:  {field_value}",
                       "heading": f"Books by {field_prop}: {field_value}",
-                      "books": all_books,
+                      'page_obj': page_obj,
+                      'page_nums': page_nums,
                   })
 
 
@@ -61,10 +74,15 @@ def show_book_by_author(request, author_id=0):
 
 def book_order(request, field_name="name", state_sort='asc'):
     books_order = Book.objects.all().order_by(f'{"-" if state_sort == "desc" else ""}{field_name}')
+    paginator = Paginator(books_order, num_items)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    page_nums = range(page_obj.paginator.num_pages)
     return render(request, 'book/index.html',
                   {
                       'title': f'Sorted by {field_name}',
-                      'books': books_order,
+                      'page_obj': page_obj,
+                      'page_nums': page_nums,
                   })
 
 

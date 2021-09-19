@@ -23,8 +23,8 @@
     </tr>
   </thead>
   <tbody>
-      {% if orders %}
-        {% for order in orders %}
+      {% if page_obj %}
+        {% for order in page_obj %}
                   <tr>
                     <th scope="row">{{ forloop.counter }}</th>
                     <td>{{ order.user.first_name }}</td>
@@ -45,5 +45,6 @@
   </tbody>
 </table>
 
+{% include 'authentication/pagination_snippet.html' %}
 
 {% endblock %}

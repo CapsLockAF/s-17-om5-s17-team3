@@ -1,16 +1,23 @@
 from django.shortcuts import render, redirect
-from .models import *
 from author.models import Author
 from author.forms import AuthorForm
+from django.core.paginator import Paginator
+
+num_items = 5
 
 
 def all_authors(request):
     authors=Author.get_all()
+    paginator = Paginator(authors, num_items)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    page_nums = range(page_obj.paginator.num_pages)
     return render(request, "author/authors.html",
                   {
                       'title': 'Authors Information',
                       "heading": "All Authors",
-                      'authors': authors,
+                      'page_obj': page_obj,
+                      'page_nums': page_nums
                   })
 
 
