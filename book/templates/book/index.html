@@ -1,0 +1,45 @@
+{% extends 'book/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<table class="table">
+     <thead class="thead-dark">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Author</th>
+          <th scope="col">
+              Count
+          </th>
+          <th scope="col">Edit</th>
+        </tr>
+    </thead>
+      <tbody>
+            {% for book in page_obj %}
+            <tr>
+                <td scope="row">
+                    <a title="view book {{ book.name }}"
+                       type="button"
+                       class="btn btn-warning btn-sm"
+                       href="/book/{{ book.id }}">
+                        {{ book.name }}
+                    </a>
+                </td>
+                <td>{% for book_author in book.authors.all %}
+                           {{ book_author.name }} {{ book_author.surname }}<br>
+                    {% endfor %}
+                </td>
+                <td>{{ book.count }}</td>
+                <td>
+                    <a href="{% url 'updated_form' book.id %}">Update</a>
+                    <a href="{% url 'deleted_form' book.id %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+      </tbody>
+</table>
+    <button type="button" class="btn btn-outline-primary mb-5"><a href="form/">Add book</a></button>
+{% include 'authentication/pagination_snippet.html' %}
+{% endblock %}

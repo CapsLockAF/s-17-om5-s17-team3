@@ -1,0 +1,89 @@
+<<<<<<< HEAD
+{% extends 'book/base.html' %}
+=======
+{% extends 'authentication/base.html' %}
+>>>>>>> 119b1d6 (add[User]: base url in main settings, output list of users)
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block heading %}
+{{ heading }}
+{% endblock %}
+
+{% block content %}
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">№</th>
+      <th scope="col">First name</th>
+      <th scope="col">Middle name</th>
+      <th scope="col">Last name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Password</th>
+      <th scope="col">Updated at</th>
+      <th scope="col">Created at</th>
+      <th scope="col">Role</th>
+      <th scope="col">is active</th>
+<<<<<<< HEAD
+<<<<<<< HEAD
+       <th><a type="button" class="btn btn-success btn-sm" href="form/0">+ Add User</a></th>
+    </tr>
+  </thead>
+  <tbody>
+      {% if page_obj %}
+        {% for user in page_obj %}
+=======
+       <th><a type="button" class="btn btn-success btn-sm" href="/user/form/">+ Add User</a></th>
+=======
+       <th><a type="button" class="btn btn-success btn-sm" href="form/0">+ Add User</a></th>
+>>>>>>> 4d977ed (add[User]: a form for creating user, methods, templates, urls, etc.)
+    </tr>
+  </thead>
+  <tbody>
+      {% if users %}
+        {% for user in users %}
+>>>>>>> 119b1d6 (add[User]: base url in main settings, output list of users)
+                  <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{user.first_name}}</td>
+                    <td>{{user.middle_name}}</td>
+                    <td>{{user.last_name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.password}}</td>
+                    <td>{{user.updated_at}}</td>
+                    <td>{{user.created_at}}</td>
+                    <td>{{user.role}}</td>
+                    <td>{{user.is_active}}</td>
+<<<<<<< HEAD
+<<<<<<< HEAD
+                    <td><a type="button" class="btn btn-info btn-sm" href="/user/{{ user.id }}/">View</a>
+                      <a type="button" class="btn btn-warning btn-sm" href="/user/form/{{ user.id }}/">Update</a>
+                      <a type="button" class="btn btn-danger btn-sm" href="/user/form/{{ user.id }}/delete/">Delete</a></td>
+=======
+                    <td><a type="button" class="btn btn-info btn-sm" href="/user/{{ el.id }}/view">View</a>
+                      <a type="button" class="btn btn-warning btn-sm" href="/user/{{ el.id }}">Update</a>
+                      <a type="button" class="btn btn-danger btn-sm" href="/user/{{ el.id }}/delete">Delete</a></td>
+>>>>>>> 119b1d6 (add[User]: base url in main settings, output list of users)
+=======
+                    <td><a type="button" class="btn btn-info btn-sm" href="/user/{{ user.id }}/">View</a>
+                      <a type="button" class="btn btn-warning btn-sm" href="/user/form/{{ user.id }}/">Update</a>
+                      <a type="button" class="btn btn-danger btn-sm" href="/user/form/{{ user.id }}/delete/">Delete</a></td>
+>>>>>>> 4d977ed (add[User]: a form for creating user, methods, templates, urls, etc.)
+                  </tr>
+             {% endfor %}
+    {% else %}
+        <p>Sorry, there is no any user in our list...</p>
+    {% endif %}
+
+  </tbody>
+</table>
+<<<<<<< HEAD
+{% include 'authentication/pagination_snippet.html' %}
+=======
+
+
+>>>>>>> 119b1d6 (add[User]: base url in main settings, output list of users)
+{% endblock %}

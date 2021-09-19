@@ -1,0 +1,31 @@
+{% extends 'book/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+
+{% block content %}
+
+<form action="" method="post" autocomplete="off">
+{% csrf_token %}
+<div class="container">
+    <div class="row">
+        <div class="p-3 my-3 col-sm-12">
+            <h1>Add author</h1>
+        <div class="my-3 col-sm-12">
+            <p><b>Name: </b>{{ form.name }}</p>
+            <p><b>Surname: </b>{{ form.surname }}</p>
+            <p><b>Patronymic: </b>{{ form.patronymic }}</p>
+        </div>
+    </div>
+<div class="p-3">
+    <button type="submit" class="btn btn-success">Submit</button>
+</div>
+    </div>
+
+</div>
+
+</form>
+
+{% endblock %}
