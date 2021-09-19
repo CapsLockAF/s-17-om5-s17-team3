@@ -1,0 +1,24 @@
+{% extends 'book/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block heading %}
+{{ heading }}
+{% endblock %}
+
+{% block content %}
+
+    <h1>{{ title }}</h1>
+    <p><b>Name of user      :</b>    {{ order_by_id.user.first_name }}</p>
+    <p><b>Book's name       :</b>    {{ order_by_id.book.name }}</p>
+    <p><b>Order created at  :</b>    {{ order_by_id.created_at }}</p>
+    <p><b>Order ends at     :</b>    {{order_by_id.end_at}}</p>
+    <p><b>Order plated at   :</b>    {{order_by_id.plated_at}}</p>
+    <a type="button" class="btn btn-warning" href="/order/">Back to Orders</a>
+
+
+
+
+{% endblock %}
