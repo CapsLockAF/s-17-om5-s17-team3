@@ -27,8 +27,8 @@
     </tr>
   </thead>
   <tbody>
-      {% if users %}
-        {% for user in users %}
+      {% if page_obj %}
+        {% for user in page_obj %}
                   <tr>
                     <td>{{ forloop.counter }}</td>
                     <td>{{user.first_name}}</td>
@@ -51,6 +51,5 @@
 
   </tbody>
 </table>
-
-
+{% include 'authentication/pagination_snippet.html' %}
 {% endblock %}
