@@ -20,9 +20,6 @@ urlpatterns = [
     path('', include('book.urls')),
     path('author/', include('author.urls')),
     path('user/', include('authentication.urls')),
-<<<<<<< HEAD
     path('order/', include('order.urls')),
-=======
->>>>>>> 119b1d6 (add[User]: base url in main settings, output list of users)
     path('admin/', admin.site.urls),
 ]
