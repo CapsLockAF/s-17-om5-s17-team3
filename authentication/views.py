@@ -59,9 +59,14 @@ def delete_user(request, id=0):
     user = CustomUser.objects.get(id=id)
     user.delete()
     users = CustomUser.get_all()
+    paginator = Paginator(users, num_items)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    page_nums = range(page_obj.paginator.num_pages)
     return render(request, 'authentication/user_list.html',
                   {
                       'title': "Library Users",
                       'heading': "List of all Users",
-                      "users": users,
+                      "page_obj": page_obj,
+                       "page_nums": page_nums,
                   })
