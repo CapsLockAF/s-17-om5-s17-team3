@@ -40,6 +40,6 @@ def author_form(request, id=0):
         return redirect("/author")
 
 
-def delete_form(request, id):
+def delete_author(request, id):
     Author.delete_by_id(id)
     return redirect("/author")
