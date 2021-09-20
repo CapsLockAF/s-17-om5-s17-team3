@@ -118,10 +118,10 @@ def book_form(request, id=0):
             form = BookForm(request.POST, instance=books)
         if form.is_valid():
             form.save()
-        return redirect("/book")
+        return redirect("/")
 
 
 def deleted_form(request, id):
     Book.delete_by_id(id)
-    return redirect("/book")
+    return redirect("/")
 
