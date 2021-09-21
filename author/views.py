@@ -2,9 +2,14 @@ from django.shortcuts import render, redirect
 from author.models import Author
 from author.forms import AuthorForm
 from django.core.paginator import Paginator
+from rest_framework import viewsets
+from .serializers import AuthorSerializer
 
 num_items = 5
 
+class AuthorView(viewsets.ModelViewSet):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
 
 def all_authors(request):
     authors=Author.get_all()

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'author',
     'book',
     'order',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -91,7 +92,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'postgres',
         'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'PASSWORD': '123456',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -136,7 +137,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-try:
-    from .local_settings import  *
-except ImportError:
-    pass
+# try:
+#     from .local_settings import  *
+# except ImportError:
+#     pass
