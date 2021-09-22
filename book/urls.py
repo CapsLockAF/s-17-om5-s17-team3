@@ -12,7 +12,6 @@ router.register('author', author.views.AuthorView)
 router.register('user', authentication.views.CustomUserView)
 router.register('order', order.views.OrderView)
 
-
 urlpatterns = [
     path('api/v1/', include(router.urls)),
     path('', views.show_all_books, name='index'),

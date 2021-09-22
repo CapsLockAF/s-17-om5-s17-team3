@@ -7,7 +7,7 @@ from order.serializers import OrderSerializer
 from .models import *
 from .forms import UserForm
 
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from .serializers import CustomUserSerializer
 
 num_items = 5
@@ -18,12 +18,10 @@ class CustomUserView(viewsets.ModelViewSet):
     serializer_class = CustomUserSerializer
 
 
-class OrderByUserIdView(viewsets.ViewSet):
-    def list(self, request, user_id=None):
-
-        queryset = Order.objects.filter(user=user_id)
-        serializer = OrderSerializer(queryset)
-        return Response(serializer.data)
+class OrderByUserIdView(generics.ListAPIView, viewsets.ViewSet):
+    def get_queryset(self):
+        user = self.request.pk
+        return Order.objects.filter(user=user)
     # queryset = Order.objects.filter(user=111)
     # serializer_class = OrderSerializer
 
