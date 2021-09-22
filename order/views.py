@@ -3,7 +3,15 @@ from .models import Order
 from .forms import OrderForm
 from django.core.paginator import Paginator
 
+from rest_framework import viewsets
+from .serializers import OrderSerializer
+
 num_items = 5
+
+
+class OrderView(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
 
 
 def all_orders(request):

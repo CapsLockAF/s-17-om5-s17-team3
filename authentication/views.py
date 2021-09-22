@@ -1,13 +1,34 @@
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
+from rest_framework.response import Response
+
+from order.models import Order
+from order.serializers import OrderSerializer
 from .models import *
 from .forms import UserForm
+
+from rest_framework import viewsets
+from .serializers import CustomUserSerializer
 
 num_items = 5
 
 
-def all_users(request):
+class CustomUserView(viewsets.ModelViewSet):
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserSerializer
 
+
+class OrderByUserIdView(viewsets.ViewSet):
+    def list(self, request, user_id=None):
+
+        queryset = Order.objects.filter(user=user_id)
+        serializer = OrderSerializer(queryset)
+        return Response(serializer.data)
+    # queryset = Order.objects.filter(user=111)
+    # serializer_class = OrderSerializer
+
+
+def all_users(request):
     users = CustomUser.get_all()
     paginator = Paginator(users, num_items)
     page_number = request.GET.get('page')
