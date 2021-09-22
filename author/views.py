@@ -7,9 +7,11 @@ from .serializers import AuthorSerializer
 
 num_items = 5
 
+
 class AuthorView(viewsets.ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
+
 
 def all_authors(request):
     authors=Author.get_all()
