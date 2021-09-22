@@ -4,8 +4,15 @@ from order.models import Order
 from .create_bd import set_bd
 from book.forms import BookForm
 from django.core.paginator import Paginator
+from rest_framework import viewsets
+from .serializers import BookSerializer
 
-num_items = 5
+num_items = 10
+
+
+class BookView(viewsets.ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
 
 
 def show_all_books(request):
@@ -88,7 +95,6 @@ def book_order(request, field_name="name", state_sort='asc'):
 
 def show_ordered_books(request):
     ordered_books = list(Order.objects.select_related('book'))
-    print('ffffffffffffffffffffff', ordered_books)
     return render(request, 'book/index.html',
                   {
                       'title': f'Ordered Books',
@@ -109,7 +115,7 @@ def book_form(request, id=0):
         else:
             books = Book.objects.get(pk=id)
             form = BookForm(instance=books)
-        return render(request, "book/book_form.html", {"form":form})
+        return render(request, "book/book_form.html", {"form": form})
     else:
         if id == 0:
             form = BookForm(request.POST)
@@ -118,10 +124,9 @@ def book_form(request, id=0):
             form = BookForm(request.POST, instance=books)
         if form.is_valid():
             form.save()
-        return redirect("/")
+        return redirect('index')
 
 
 def deleted_form(request, id):
     Book.delete_by_id(id)
-    return redirect("/")
-
+    return redirect("index")
